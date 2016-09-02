@@ -21,8 +21,11 @@ pios: boot.o kernel.o
 boot.o: boot.S
  	$(AS) $(ASFLAGS) $? -o $@
 
-kernek.o: kernel.c kernel.h
+kernel.o: kernel.c kernel.h
 	$(CC) $(CFLSGS) $? -o $@
 
+shell.o: shell.c shell.h
+	${CC} ${CSFLAGS} $? -o $@
+
 clean:
-	@rm -r build
+	@rm build/*.o
