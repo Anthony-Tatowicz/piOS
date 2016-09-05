@@ -13,9 +13,21 @@
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
+#include <limits.h>
 
-int main();
-char get_command();
-bool process_command(char cmd);
-void put_output();
-void print_menu();
+void shell_init(char* dir);
+int read_dirs(char* dir);
+int read_files(char* dir);
+int process_command(char cmd);
+void print_menu(char* cwd);
+int edit();
+int run();
+int change_dir();
+void help();
+
+enum Commands {
+    QUIT = 'q',
+    RUN  = 'r',
+    EDIT = 'e',
+    CHDIR = 'c'
+};
