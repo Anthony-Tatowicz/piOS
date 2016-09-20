@@ -35,10 +35,15 @@ void delete_list(list_t* list) {
 
 void push(list_t* list, void* data) {
   node_t* node = malloc(sizeof(node_t));
+  if(node == NULL) exit(1);
+
   node->data = malloc(list->elm_size);
+  if(node->data == NULL) exit(1);
+
   memcpy(node->data, data, list->elm_size);
 
   node->next = list->head;
+  node->prev = NULL;
   list->head = node;
 
   // first node?
@@ -51,8 +56,11 @@ void push(list_t* list, void* data) {
 
 void append(list_t* list, void* data) {
   node_t *node = malloc(sizeof(node_t));
+  if(node == NULL) exit(1);
   node->data = malloc(list->elm_size);
+  if(node->data == NULL) exit(1);
   node->next = NULL;
+  node->prev = NULL;
 
   memcpy(node->data, data, list->elm_size);
 
@@ -61,6 +69,7 @@ void append(list_t* list, void* data) {
   }
   else {
     list->tail->next = node;
+    node->prev = list->tail;
     list->tail = node;
   }
 

@@ -18,6 +18,7 @@ typedef bool (*list_iter) (void*);
 typedef struct _node {
     void *data;
     struct _node *next;
+    struct _node *prev;
 } node_t;
 
 typedef struct {
@@ -39,6 +40,6 @@ void list_for_each(list_t *list, list_iter iter);
 void list_head(list_t *list, void *data, bool remove);
 void list_tail(list_t *list, void *data);
 
-node_t* get(list_t *head, size_t i);
+node_t* get(list_t *list, size_t i);
 
 #endif

@@ -9,7 +9,8 @@
 
 #define MENU_LENGTH 8
 #define DIR_OFFSET 8
-#define FILE_OFFSET 17
+#define FILE_OFFSET 18
+#define CMD_OFFSET 2
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -29,7 +30,7 @@ void free_item(void *data);
 int read_dir(DIR *dir, list_t *hist);
 int read_files(char *dir);
 
-int process_command(char cmd, list_t *hist, node_t *current, size_t *index);
+void main_loop_fn();
 
 void print_list(list_t *head, char *title, int pos);
 void print_ops();
@@ -39,8 +40,8 @@ int edit();
 int run();
 int change_dir();
 void help();
-int next(list_t *head, node_t *current, size_t *idx);
-int prev(list_t *head, node_t *current, size_t *idx);
+node_t *next(list_t *head, node_t *current);
+node_t *prev(list_t *head, node_t *current);
 
 enum Commands {
     QUIT  = 'q',
@@ -48,7 +49,8 @@ enum Commands {
     EDIT  = 'e',
     CHDIR = 'c',
     NEXT  = 'n',
-    PREV  = 'p'
+    PREV  = 'p',
+    RESET = 's'
 };
 
 extern int errno;
